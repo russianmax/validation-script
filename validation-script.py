@@ -78,7 +78,7 @@ rows = ws.get_all_values()
 df1 = pd.DataFrame.from_records(rows,index=None)
 df1 = df1.replace(np.nan, '', regex=True).replace(['0',0],'')
 
-#Number of rows in first sheet
+# total numbers of rows,cols
 print(df1.shape)
 
 #@title Accessing the Pricing Procedure from the Pricing Analysis File, formatting the data and returning total numbers of rows and columns 
@@ -168,24 +168,13 @@ number_of_rows = empty_rows.count(empty_rows[2]) + empty_rows.count(None) + 2
 
 df2 = df2.iloc[:number_of_rows]
 df2 = df2[df2.columns[right_column]]
-
 df2 = df2.mask(df2.eq(None)).dropna()
-
 df2 = df2.replace(np.nan, '', regex=True).replace(['0',0],'')
 
-
-# for cell in df2[df2.columns[1]]:
-#   print(len(cell))
-#   if len(cell) == 0:
-#     print("hello")
-
-#df2 = df2.iloc[1:].mask(df2.eq('')).dropna()
-
 df2 = df2.iloc[1:]
-
-#df2 = df2.iloc[1:].mask(df2.eq('')).dropna()
+# total numbers of rows,cols
 print(df2.shape)
-#print(df2)
+
 
 #@title Compares Pricing Procedures and Displays the Differences 
 
@@ -216,9 +205,6 @@ for column in results:
 # gets the right header for the results sheet
 new_header_name = df2.iloc[0].to_list()
 old_header_name = results.columns.to_list()
-
-# print(new_header_name)
-# print(old_header_name)
 
 # # replaces the header in the results sheet
 results.rename(
